@@ -1,51 +1,16 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editando cliente</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
-  <body>
-    <strong>Atualizando cliente:</strong>
-    <p>
-    <strong>Nome atual:</strong> {{cliente.nome}}<br>
-    <strong>Celular atual:</strong> {{cliente.celular}}<br>
-    <strong>Email atual:</strong>{{cliente.email}}
-    </p>
-
+  <form class="c-form" action="{{ url_for('clientes.inserir_cliente')}}" method="POST">
     <div class="mb-3">
-        <label for="novoNomeCliente" class="form-label">Atualizar nome:</label>
-        <input class="form-control" id="novoNomeCliente" aria-describedby="novoNomeCliente"
-        placeholder="{{cliente.nome}}">
+        <label name="nome" type="text">Nome:</label>
+        <input class="form-control">
     </div>
         <div class="mb-3">
-        <label for="novoCelularCliente" class="form-label">Atualizar Celular:</label>
-        <input class="form-control" id="novoCelularCliente" aria-describedby="novoCelularCliente"
-        placeholder="{{cliente.celular}}">
+        <label name="celular" type="text" >Celular:</label>
+        <input class="form-control">
     </div>
       </div>
         <div class="mb-3">
-        <label for="novoEmailCliente" class="form-label">Atualizar email:</label>
-        <input class="form-control" id="novoEmailCliente" aria-describedby="novoEmailCliente"
-        placeholder="{{cliente.email}}">
+        <label name="email" type="email" >Email:</label>
+        <input class="form-control">
     </div>
-    <button id="Atualizar" type="button" class="btn btn-danger">Atualizar</button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  </body>
-</html>
+    <button type="submit" class="btn btn-primary">Salvar cliente</button>
+  </form>
