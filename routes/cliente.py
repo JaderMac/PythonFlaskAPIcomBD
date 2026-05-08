@@ -22,17 +22,22 @@ def listar_clientes():
 
 @cliente_route.route('/', methods=[('POST')])
 def inserir_cliente():
-    print(request.json)
-    return {"ok":"ok"}
-    # return render_template('form_atualizar_cliente.html')
+    data = request.json
 
-# @cliente_route.route('/new', methods=[('POST')])
+    novo_usuario = {
+        "id": len(clientes)+1,
+        "nome": data['nome'],
+        "email":data['email'],
+        "celular":data['celular']
+    }
+    clientes.append(novo_usuario)
+    return render_template('item_cliente.html', cliente=novo_usuario)
+
+
 @cliente_route.route('/new')
 def form_cliente():
     # formulario de criar clientes
-    print(request.json)
-    return {"ok":"ok"}
-    # return render_template('form_atualizar_cliente.html')
+    return render_template('form_cliente.html')
 
 @cliente_route.route('/<int:cliente_id>')
 def detalhar_cliente(cliente_id):
@@ -40,10 +45,15 @@ def detalhar_cliente(cliente_id):
    return render_template('detalhar_cliente.html', cliente=cliente)
 
 @cliente_route.route('/<int:cliente_id>/edit')
-def form_atualizar_cliente(cliente_id):
+def form_edit_cliente(cliente_id):
     # formulario de editar clientes
-    cliente=clientes[cliente_id]
-    return render_template('form_atualizar_cliente.html', cliente=cliente)
+    cliente = None
+    
+    for c in clientes:
+        if c['id'] == cliente_id:
+            cliente=c
+
+    return render_template('form_cliente.html', cliente=cliente)
 
 @cliente_route.route('/<int:cliente_id>/update', methods=[('PUT')])
 def atualizar_cliente(cliente_id):
@@ -53,4 +63,6 @@ def atualizar_cliente(cliente_id):
 @cliente_route.route('/<int:cliente_id>/delete', methods=[('DELETE')])
 def deletar_cliente(cliente_id):
     # deleta cliente
-    pass
+    global clientes
+    clientes = [c for c in clientes if c['id'] != cliente_id]
+    return{'deleted':'ok'}

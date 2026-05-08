@@ -1,4 +1,3 @@
-    <h1>Lista de clientes</h1>
       <table class="table">
         <thead>
           <tr>
@@ -9,16 +8,9 @@
             <th scope="col">Ações</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="lista-clientes">
           {%for cliente in clientes%}  
-          <tr>
-            <th scope="row">{{cliente.id}}</th>
-            <td>{{cliente.nome}}</td>
-            <td>{{cliente.celular}}</td>
-            <td>{{cliente.email}}</td>
-            <td><button id="editarCliente" type="button" class="btn btn-primary">Editar Cliente</button>
-            <button id="deletarCliente" type="button" class="btn btn-danger">Deletar Cliente</button></td>          
-          </tr>
+              {% include 'item_cliente.html' %}
           {% endfor %}
         </tbody>
       </table>
