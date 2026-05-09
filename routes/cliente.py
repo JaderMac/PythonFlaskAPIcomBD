@@ -41,7 +41,8 @@ def form_cliente():
 
 @cliente_route.route('/<int:cliente_id>')
 def detalhar_cliente(cliente_id):
-   cliente=clientes[cliente_id] 
+   # Exibir detalhes do cliente
+   cliente = list(filter(lambda c: c['id'] == cliente_id, clientes))[0]
    return render_template('detalhar_cliente.html', cliente=cliente)
 
 @cliente_route.route('/<int:cliente_id>/edit')
@@ -58,7 +59,18 @@ def form_edit_cliente(cliente_id):
 @cliente_route.route('/<int:cliente_id>/update', methods=[('PUT')])
 def atualizar_cliente(cliente_id):
     # Atualiza cliente
-    pass
+    cliente = None
+    data = request.json
+
+    for c in clientes:
+        if c['id'] == cliente_id:
+            c['nome'] = data['nome']
+            c['email'] = data['email']
+            c['celular'] = data['celular']
+
+            cliente_editado = c
+            
+    return render_template('item_cliente.html', cliente=cliente_editado)
 
 @cliente_route.route('/<int:cliente_id>/delete', methods=[('DELETE')])
 def deletar_cliente(cliente_id):

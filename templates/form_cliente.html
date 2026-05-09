@@ -5,7 +5,11 @@
       action="{{ url_for('clientes.inserir_cliente')}}" 
     {% endif %}
     method="{% if cliente %}PUT{% else %}POST{% endif %}"
-    c-append="#lista-clientes">
+    {% if cliente %}
+      c-swap=".cliente-{{cliente.id}}"
+    {% else %}
+      c-append="#lista-clientes"
+    {% endif %}>
           <div class="mb-3">
             <label class="form-label">Nome:</label>
             <input name="nome" type="text" class="form-control" {% if cliente %}value="{{cliente.nome}}"{% endif %}>
