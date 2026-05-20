@@ -1,13 +1,8 @@
 from flask import Flask
-from routes.home import home_route
-from routes.cliente import cliente_route
+from configuration import configure_all
 
 app = Flask(__name__)
-app.json.sort_keys = False
 
-app.register_blueprint(home_route)
-app.register_blueprint(cliente_route, url_prefix='/clientes')
+configure_all(app)
 
 app.run(debug=True)
-
-# video no 1h20m15s
